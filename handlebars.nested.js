@@ -1,12 +1,14 @@
 Handlebars.registerHelper = function(name, fn, inverse) {
 	var nestedFn = function() {
+		scope = this
+
 		_.each(arguments, function(arg) {
 			if (_.isObject(arg) && arg.hash) {
 				_.each(arg.hash, function(val, key) {
-					arg.hash[key] = Handlebars.resolveNested.apply(this, [val])
+					arg.hash[key] = Handlebars.resolveNested.apply(scope, [val])
 				});
 			} else {
-				arg = Handlebars.resolveNested.apply(this, [arg])
+				arg = Handlebars.resolveNested.apply(scope, [arg])
 			}
 		});
 
