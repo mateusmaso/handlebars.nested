@@ -11,15 +11,14 @@
 
         if (argument && argument.hash) {          
           for (key in argument.hash) {
-            var value = argument.hash[key];
-            argument.hash[key] = Handlebars.resolveNested.apply(this, [value]);
+            argument.hash[key] = Handlebars.resolveNested.apply(this, [argument.hash[key]]);
           }
 
-          _arguments[i] = argument;
+          _arguments.push(argument);
         } else {
-          _arguments[i] = Handlebars.resolveNested.apply(this, [argument]);
+          _arguments.push(Handlebars.resolveNested.apply(this, [argument]));
         }
-      };
+      }
 
       return fn.apply(this, _arguments);
     };
