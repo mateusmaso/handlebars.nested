@@ -2,5 +2,5 @@ handlebars.nested
 =================
 ```handlebars
 {{autolink "{{breakline text}}"}}
-{{view placeholder="{{t 'tooltip.info'}}"}}
+{{autocomplete placeholder="{{t 'autocomplete.placeholder'}}" url="/users/{{user.id}}/followers"}}
 ```
