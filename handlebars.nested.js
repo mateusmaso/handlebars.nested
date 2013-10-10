@@ -4,7 +4,7 @@
 
   Handlebars.registerHelper = function(name, fn, inverse) {
     var nestedFn = function() {
-      var _arguments = [];
+      var args = [];
 
       for (i in arguments) {
         var argument = arguments[i];
@@ -14,20 +14,20 @@
             argument.hash[key] = Handlebars.resolveNested.apply(this, [argument.hash[key]]);
           }
 
-          _arguments.push(argument);
+          args.push(argument);
         } else {
-          _arguments.push(Handlebars.resolveNested.apply(this, [argument]));
+          args.push(Handlebars.resolveNested.apply(this, [argument]));
         }
       }
 
-      return fn.apply(this, _arguments);
+      return fn.apply(this, args);
     };
 
     registerHelper.apply(this, [name, nestedFn, inverse]);
   };
 
   Handlebars.resolveNested = function(value) {
-    if (toString.call(value) === '[object String]' && value.indexOf('{{') >= 0) {
+    if (toString.call(value) == '[object String]' && value.indexOf('{{') >= 0) {
       value = Handlebars.compile(value)(this);
     }
     
