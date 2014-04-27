@@ -10,7 +10,7 @@ This library is an extension for Handlebars which allows nesting helpers or expr
 
 ## Examples
 
-```handlebars
+```html
 <table>
   <tr>
     <td>{{autolink "{{breakline text}}"}}</td>
