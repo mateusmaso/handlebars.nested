@@ -5,8 +5,7 @@ This library is an extension for Handlebars which allows nesting helpers or expr
 
 ## Features
 
-* Nesting helpers in one level deep.
-* Nesting expressions with helpers in one level deep.
+* Nesting helpers and expressions in one level deep.
 
 ## Dependencies
 
