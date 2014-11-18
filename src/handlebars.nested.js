@@ -1,4 +1,14 @@
-(function(Handlebars) {
+(function(root, factory) {
+
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports)
+      module.exports = factory(global.Handlebars);
+    exports = factory(global.Handlebars);
+  } else {
+    factory(root.Handlebars);
+  }
+
+}(this, function(Handlebars) {
 
   var registerHelper = Handlebars.registerHelper;
 
@@ -13,7 +23,7 @@
       for (var index = 0; index < arguments.length; index++) {
         var argument = arguments[index];
 
-        if (argument && argument.hash) {     
+        if (argument && argument.hash) {
           for (key in argument.hash) {
             argument.hash[key] = Handlebars.resolveNested.apply(this, [argument.hash[key]]);
           }
@@ -34,8 +44,8 @@
     if (isString(value) && value.indexOf('{{') >= 0) {
       value = Handlebars.compile(value)(this);
     }
-    
+
     return value;
   };
 
-})(Handlebars);
+}));
