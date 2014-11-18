@@ -1,12 +1,15 @@
 handlebars.nested [![Build Status](https://travis-ci.org/mateusmaso/handlebars.nested.svg?branch=master)](https://travis-ci.org/mateusmaso/handlebars.nested)
 =================
 
-This library is an extension for Handlebars which allows nesting helpers or expressions within other helpers in one level deep. It was first created as a workaround to older versions, but after more issues came across it turned out to be an effective solution for those problems.
+This library is an extension for Handlebars which allows nesting helpers or expressions within other helpers in one level deep. It was first created as a workaround to older versions, but after more issues it turned out to be an effective solution for many problems.
 
 ## Features
 
-* Nesting helpers in one level deep.
-* Nesting expressions with helpers in one level deep.
+* Nesting helpers and expressions in one level deep.
+
+## Dependencies
+
+* handlebars.js (>= 1.0)
 
 ## Examples
 
