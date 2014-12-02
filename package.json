@@ -1,7 +1,7 @@
 {
   "name": "handlebars.nested",
   "description": "Handlebars plugin for nesting helpers and expressions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "mateusmaso",
   "keywords": ["handlebars", "javascript", "nested"],
   "devDependencies": {

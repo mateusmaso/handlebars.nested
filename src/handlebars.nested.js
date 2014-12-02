@@ -25,7 +25,10 @@
         var argument = arguments[index];
 
         if (argument && argument.hash) {
-          for (key in argument.hash) argument.hash[key] = Handlebars.resolveNested.apply(this, [argument.hash[key]]);
+          for (key in argument.hash) {
+            argument.hash[key] = Handlebars.resolveNested.apply(this, [argument.hash[key]]);
+          }
+
           nestedArguments.push(argument);
         } else {
           nestedArguments.push(Handlebars.resolveNested.apply(this, [argument]));
@@ -39,7 +42,10 @@
   };
 
   Handlebars.resolveNested = function(value) {
-    if (Utils.isString(value) && value.indexOf('{{') >= 0) value = Handlebars.compile(value)(this);
+    if (Utils.isString(value) && value.indexOf('{{') >= 0) {
+      value = Handlebars.compile(value)(this);
+    }
+
     return value;
   };
 
