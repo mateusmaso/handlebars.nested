@@ -1,21 +1,19 @@
 handlebars.nested [![Build Status](https://travis-ci.org/mateusmaso/handlebars.nested.svg?branch=master)](https://travis-ci.org/mateusmaso/handlebars.nested)
 =================
 
-This library is an extension for Handlebars which allows nesting helpers and expressions in one level deep. It was first created as a workaround but turned out to be an simple and effective solution for many issues.
+This is an extension for Handlebars which allows nesting helpers and expressions in one level deep. For latest versions of Handlebars, please consider using [subexpressions](http://handlebarsjs.com/expressions.html) instead.
 
-## Features
+## Install
 
-* Nesting helpers and expressions.
+```
+$ npm install --save handlebars.nested
+```
 
-## Dependencies
-
-* handlebars.js (>= 1.0.0)
-
-## Node
+## Usage
 
 ```javascript
-var Handlebars = global.Handlebars = require("handlebars");
-require("handlebars.nested");
+var Handlebars = require("handlebars");
+require("handlebars.nested").default(Handlebars);
 ```
 
 ## Examples
@@ -31,4 +29,4 @@ require("handlebars.nested");
 
 ## License
 
-Copyright (c) 2012-2014 Mateus Maso. Released under an MIT license.
+MIT © [Mateus Maso](http://www.mateusmaso.com)

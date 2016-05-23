@@ -1,6 +1,11 @@
-var chai = require("chai");
-global.Handlebars = require("handlebars");
-require("../src/handlebars.nested");
+if (typeof window === "undefined") {
+  var jsdom = require("jsdom").jsdom;
+  var document = global.document = jsdom("test");
+  var window = global.window = document.defaultView;
+  var chai = require("chai");
+  var Handlebars = require("handlebars");
+  require("../lib").default(Handlebars);
+}
 
 describe("handlebars.nested", function() {
   beforeEach(function() {

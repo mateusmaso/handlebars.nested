@@ -1,61 +1,125 @@
 // handlebars.nested
 // -----------------
-// v0.1.1
+// v0.2.0
 //
-// Copyright (c) 2012-2014 Mateus Maso
+// Copyright (c) 2012-2016 Mateus Maso
 // Distributed under MIT license
 //
 // http://github.com/mateusmaso/handlebars.nested
 
-(function(root, factory) {
 
-  if (typeof exports !== 'undefined') {
-    if (typeof module !== 'undefined' && module.exports)
-      module.exports = factory(global.Handlebars);
-    exports = factory(global.Handlebars);
-  } else {
-    factory(root.Handlebars);
-  }
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
 
-}(this, function(Handlebars) {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.registerHelper = registerHelper;
+exports.resolveNested = resolveNested;
 
-  var Utils = Handlebars.Utils;
-  var registerHelper = Handlebars.registerHelper;
+var _deps = require("../deps");
 
-  Handlebars.Utils.isString = function(object) {
-    return toString.call(object) == '[object String]';
-  };
+var _deps2 = _interopRequireDefault(_deps);
 
-  Handlebars.registerHelper = function(name, fn, inverse) {
-    var nestedFn = function() {
-      var nestedArguments = [];
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-      for (var index = 0; index < arguments.length; index++) {
-        var argument = arguments[index];
+function registerHelper(name, fn, inverse) {
+  var nestedFn = function nestedFn() {
+    var nestedArguments = [];
 
-        if (argument && argument.hash) {
-          for (key in argument.hash) {
-            argument.hash[key] = Handlebars.resolveNested.apply(this, [argument.hash[key]]);
-          }
+    for (var index = 0; index < arguments.length; index++) {
+      var argument = arguments[index];
 
-          nestedArguments.push(argument);
-        } else {
-          nestedArguments.push(Handlebars.resolveNested.apply(this, [argument]));
+      if (argument && argument.hash) {
+        for (var key in argument.hash) {
+          argument.hash[key] = resolveNested.apply(this, [argument.hash[key]]);
         }
+
+        nestedArguments.push(argument);
+      } else {
+        nestedArguments.push(resolveNested.apply(this, [argument]));
       }
-
-      return fn.apply(this, nestedArguments);
-    };
-
-    registerHelper.apply(this, [name, nestedFn, inverse]);
-  };
-
-  Handlebars.resolveNested = function(value) {
-    if (Utils.isString(value) && value.indexOf('{{') >= 0) {
-      value = Handlebars.compile(value)(this);
     }
 
-    return value;
+    return fn.apply(this, nestedArguments);
   };
 
-}));
+  _deps2.default.Handlebars._registerHelper.apply(this, [name, nestedFn, inverse]);
+};
+
+function resolveNested(value) {
+  if ((0, _deps.getUtils)().isString(value) && value.indexOf('{{') >= 0) {
+    value = _deps2.default.Handlebars.compile(value)(this);
+  }
+
+  return value;
+};
+
+},{"../deps":2}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getUtils = getUtils;
+var deps = {};
+
+function getUtils() {
+  return deps.Handlebars.Utils;
+}
+
+exports.default = deps;
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = HandlebarsNested;
+
+var _utils = require('./utils');
+
+var _core = require('./core');
+
+var _deps = require('./deps');
+
+var _deps2 = _interopRequireDefault(_deps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function HandlebarsNested(Handlebars) {
+  if (!_deps2.default.Handlebars) {
+    var extend = Handlebars.Utils.extend;
+
+
+    extend(_deps2.default, { Handlebars: Handlebars });
+
+    extend(Handlebars, {
+      resolveNested: _core.resolveNested,
+      registerHelper: _core.registerHelper,
+      _registerHelper: Handlebars.registerHelper
+    });
+
+    extend(Handlebars.Utils, { isString: _utils.isString });
+  }
+
+  return Handlebars;
+}
+
+if (typeof window !== "undefined" && window.Handlebars) {
+  HandlebarsNested(window.Handlebars);
+}
+
+},{"./core":1,"./deps":2,"./utils":4}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isString = isString;
+function isString(object) {
+  return toString.call(object) == '[object String]';
+}
+
+},{}]},{},[3]);
