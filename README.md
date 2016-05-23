@@ -1,7 +1,7 @@
 handlebars.nested [![Build Status](https://travis-ci.org/mateusmaso/handlebars.nested.svg?branch=master)](https://travis-ci.org/mateusmaso/handlebars.nested)
 =================
 
-This is an extension for Handlebars which allows nesting helpers and expressions in one level deep. For latest versions of Handlebars, please consider using [subexpressions](http://handlebarsjs.com/expressions.html) instead.
+This is a Handlebars plugin which allows nesting helpers and expressions in one level deep. For latest versions of Handlebars, please consider using [subexpressions](http://handlebarsjs.com/expressions.html) instead.
 
 ## Install
 
