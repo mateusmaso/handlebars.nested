@@ -1,8 +1,8 @@
 // handlebars.nested
 // -----------------
-// v0.2.1
+// v0.2.2
 //
-// Copyright (c) 2012-2016 Mateus Maso
+// Copyright (c) 2012-2017 Mateus Maso
 // Distributed under MIT license
 //
 // http://github.com/mateusmaso/handlebars.nested
