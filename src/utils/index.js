@@ -1,3 +1,5 @@
-export function isString(object) {
-  return toString.call(object) == '[object String]';
+import isString from './isString';
+
+export {
+  isString
 }

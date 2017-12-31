@@ -1,21 +1,40 @@
 import {isString} from './utils';
 import {registerHelper, resolveNested} from './core';
-import deps from "./deps";
+
+function bindAll(object, parent) {
+  Object.keys(object).forEach((key) => {
+    if (typeof object[key] === "function") {
+      object[key] = object[key].bind(parent);
+    }
+  })
+
+  return object;
+};
+
+function extendRegisterHelper(Handlebars) {
+  var _registerHelper;
+
+  if (Handlebars._registerHelper) {
+    _registerHelper = Handlebars._registerHelper;
+  } else {
+    _registerHelper = Handlebars.registerHelper;
+  }
+
+  return {
+    _registerHelper,
+    registerHelper
+  };
+};
 
 export default function HandlebarsNested(Handlebars) {
-  if (!deps.Handlebars) {
-    var {extend} = Handlebars.Utils;
+  Object.assign(Handlebars, bindAll({
+    resolveNested,
+    ...extendRegisterHelper(Handlebars)
+  }, Handlebars));
 
-    extend(deps, {Handlebars});
-
-    extend(Handlebars, {
-      resolveNested,
-      registerHelper,
-      _registerHelper: Handlebars.registerHelper
-    });
-
-    extend(Handlebars.Utils, {isString});
-  }
+  Object.assign(Handlebars.Utils, bindAll({
+    isString
+  }, Handlebars.Utils));
 
   return Handlebars;
 }
